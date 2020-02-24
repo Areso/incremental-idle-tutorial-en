@@ -8,6 +8,16 @@
   </style>
 </head>
 <body>
-Coppers: 0<br>
+Coppers: <span id="spnCoppersValue">0</span><br>
+<script>
+  let coppers = 0;
+  let copperGrowth = 1;
+  const spnCoppersVal = document.getElementById("spnCoppersValue");
+  myTimer = setInterval(endOfTurnCalc, 1000);
+  function endOfTurnCalc() {
+    coppers = coppers+copperGrowth;
+    spnCoppersVal.innerText = coppers;
+  }
+</script>
 </body>
 </html>
