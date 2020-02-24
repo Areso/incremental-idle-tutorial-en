@@ -8,6 +8,7 @@
   </style>
 </head>
 <body>
+<button id="btnUpgCopperMine" onclick="upgCopperMine()">Upgrade copper mine<br>price: 10 coppers</button><br>
 Coppers: <span id="spnCoppersValue">0</span><br>
 <script>
   let coppers = 0;
@@ -15,8 +16,21 @@ Coppers: <span id="spnCoppersValue">0</span><br>
   const spnCoppersVal = document.getElementById("spnCoppersValue");
   myTimer = setInterval(endOfTurnCalc, 1000);
   function endOfTurnCalc() {
-    coppers = coppers+copperGrowth;
+    coppers = coppers+copperGrowth*coppersUpgLevel;
     spnCoppersVal.innerText = coppers;
+  }
+  let coppersUpgCost  = 10;
+  let coppersUpgLevel = 1;
+  const btnUpgCopperMine = document.getElementById("btnUpgCopperMine");
+  function upgCopperMine() {
+    if (coppers>=coppersUpgCost){
+      coppers = coppers-coppersUpgCost;
+      coppersUpgLevel = coppersUpgLevel + 1;
+      coppersUpgCost  = coppersUpgCost*2;
+      spnCoppersVal.innerText   = coppers;
+      let buttonUpgCopperMineLabel = "Upgrade copper mine<br>price: "+coppersUpgCost.toString()+" coppers";
+      btnUpgCopperMine.innerHTML = buttonUpgCopperMineLabel;
+    }
   }
 </script>
 </body>
