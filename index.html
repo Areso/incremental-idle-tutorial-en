@@ -16,9 +16,15 @@ Coppers <span id="spnCoppersRate">1</span> per second<br>
   let copperGrowth = 1;
   const spnCoppersVal = document.getElementById("spnCoppersValue");
   myTimer = setInterval(endOfTurnCalc, 1000);
+  let win_condition = 50;
   function endOfTurnCalc() {
-    coppers = coppers+copperGrowth*coppersUpgLevel;
-    spnCoppersVal.innerText = coppers;
+    if (coppers < win_condition) {
+      coppers = coppers+copperGrowth*coppersUpgLevel;
+      spnCoppersVal.innerText = coppers;
+    } else {
+      clearTimeout(myTimer);
+      alert("Congrats! You reached the endgame target "+win_condition.toString());
+    }
   }
   let coppersUpgCost  = 10;
   let coppersUpgLevel = 1;
