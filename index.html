@@ -10,6 +10,7 @@
 <body>
 <button id="btnUpgCopperMine" onclick="upgCopperMine()">Upgrade copper mine<br>price: 10 coppers</button><br>
 Coppers: <span id="spnCoppersValue">0</span><br>
+Coppers <span id="spnCoppersRate">1</span> per second<br>
 <script>
   let coppers = 0;
   let copperGrowth = 1;
@@ -22,6 +23,7 @@ Coppers: <span id="spnCoppersValue">0</span><br>
   let coppersUpgCost  = 10;
   let coppersUpgLevel = 1;
   const btnUpgCopperMine = document.getElementById("btnUpgCopperMine");
+  const spnCoppersRate = document.getElementById("spnCoppersRate");
   function upgCopperMine() {
     if (coppers>=coppersUpgCost){
       coppers = coppers-coppersUpgCost;
@@ -30,6 +32,7 @@ Coppers: <span id="spnCoppersValue">0</span><br>
       spnCoppersVal.innerText   = coppers;
       let buttonUpgCopperMineLabel = "Upgrade copper mine<br>price: "+coppersUpgCost.toString()+" coppers";
       btnUpgCopperMine.innerHTML = buttonUpgCopperMineLabel;
+      spnCoppersRate.innerText   = copperGrowth*coppersUpgLevel;
     }
   }
 </script>
