@@ -12,6 +12,7 @@
 Coppers: <span id="spnCoppersValue">0</span><br>
 Coppers <span id="spnCoppersRate">1</span> per second<br>
 <button id="btnSaveGame" onclick="saveGame()" style="width: 240px;">Save game</button><br>
+<input id="inpChbAutosave" type="checkbox" onclick="setupAutosave()" value="autosave">Autosave</input><br>
 <button id="btnLoadGame" onclick="loadGame()" style="width: 240px;">Load game</button><br>
 <script>
   let coppers = 0;
@@ -23,6 +24,9 @@ Coppers <span id="spnCoppersRate">1</span> per second<br>
     if (coppers < win_condition) {
       coppers = coppers+copperGrowth*coppersUpgLevel;
       spnCoppersVal.innerText = coppers;
+      if (autosave === true) {
+        saveGame();
+      }
     } else {
       clearTimeout(myTimer);
       alert("Congrats! You reached the endgame target "+win_condition.toString());
@@ -47,6 +51,7 @@ Coppers <span id="spnCoppersRate">1</span> per second<br>
     localStorage.setItem('coppers', coppers);
     localStorage.setItem('coppersUpgCost', coppersUpgCost);
     localStorage.setItem('coppersUpgLevel', coppersUpgLevel);
+    localStorage.setItem('autosave', autosave);
   }
   function loadGame() {
     coppers         = parseInt(localStorage.getItem('coppers'));
@@ -56,6 +61,21 @@ Coppers <span id="spnCoppersRate">1</span> per second<br>
     let buttonUpgCopperMineLabel = "Upgrade copper mine<br>price: "+coppersUpgCost.toString()+" coppers";
     btnUpgCopperMine.innerHTML = buttonUpgCopperMineLabel;
     spnCoppersRate.innerText   = copperGrowth*coppersUpgLevel;
+    autosave        = (localStorage.getItem('autosave').toLowerCase() === 'true');
+    if (autosave===true){
+      chbAutosave.checked = true;
+    } else {
+      chbAutosave.checked = false;
+    }
+  }
+  let autosave = false;
+  const chbAutosave = document.getElementById("inpChbAutosave");
+  function setupAutosave() {
+    if (chbAutosave.checked === true){
+      autosave = true;
+    } else {
+      autosave = false;
+    }
   }
 </script>
 </body>
